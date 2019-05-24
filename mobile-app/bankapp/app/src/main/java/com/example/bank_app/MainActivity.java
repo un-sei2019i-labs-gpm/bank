@@ -12,23 +12,15 @@ import android.widget.Toast;
 import dataAccess.SQLite_OpenHelper;
 
 public class MainActivity extends AppCompatActivity{
-    //TextView tvRegistrese;
+
     Button logInButton ;
     SQLite_OpenHelper helper = new  SQLite_OpenHelper(this, "BD1", null, 1);
-    //UserRegister filler=new UserRegister();
+
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //tvRegistrese = (TextView) findViewById(R.id.tvRegistrese);
-        //tvRegistrese.setOnClickListener(new View.OnClickListener() {
-          //  public void onClick(View v){
-            //    Intent i = new Intent(getApplicationContext(), registro.class);
-              //  startActivity(i);
-            //}
-        //});
-        //filler.populateDataBase();
         helper.open();
         helper.insertReg("Andres Moya","1018","afmoyar","123456");
         helper.insertReg("Sergio Pineda","1234","saepinedave","123456");
