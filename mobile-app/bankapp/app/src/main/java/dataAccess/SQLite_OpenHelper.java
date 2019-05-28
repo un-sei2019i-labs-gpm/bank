@@ -13,11 +13,28 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper{
         super(context, name, factory, version);
     }
 
-    public void onCreate(SQLiteDatabase db){
-        String query = "create table user(_ID integer primary key autoincrement, document text unique, name text, email text, password text);";
-        db.execSQL(query);
-    }
 
+    public void onCreate(SQLiteDatabase db){
+        String query = "create table user(_ID integer primary key autoincrement, document text unique, name text, email text, password text, int balance);";
+        db.execSQL(query);
+
+    }
+    public void insertReg(String name, String doc, String email, String pas,int balance){
+        ContentValues valores = new ContentValues();
+        valores.put("document",doc);
+        valores.put("name", name);
+        valores.put("email",email);
+        valores.put("password", pas);
+        valores.put("balance", balance);
+        this.getWritableDatabase().insert("user", null, valores);
+    }
+    public void populateDatabase()
+    {
+        this.open();
+        this.insertReg("Andres Moya","1018","afmoyar","123456",1000000);
+        this.insertReg("Sergio Pineda","1234","saepinedave","123456",1000000);
+        this.close();
+    }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion,int newVersion){
     }
@@ -31,14 +48,7 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper{
         this.close();
     }
 
-    public void insertReg(String name, String doc, String email, String pas){
-        ContentValues valores = new ContentValues();
-        valores.put("document",doc);
-        valores.put("name", name);
-        valores.put("email",email);
-        valores.put("password", pas);
-        this.getWritableDatabase().insert("user", null, valores);
-    }
+
 
     //metodo para validar si el usuario existe
 
@@ -46,7 +56,7 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper{
     {
         Cursor currentCursor = null;
         currentCursor = this.getReadableDatabase().query("user", new String[] {"_ID",
-                "document","name", "email", "password"}, "document like '"+doc+"'"+
+                "document","name", "email", "password","balance"}, "document like '"+doc+"'"+
                 "and password like '"+pas+"'", null, null, null, null);
 
         return currentCursor;

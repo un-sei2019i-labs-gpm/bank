@@ -21,10 +21,8 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        helper.open();
-        helper.insertReg("Andres Moya","1018","afmoyar","123456");
-        helper.insertReg("Sergio Pineda","1234","saepinedave","123456");
-        helper.insertReg("Cristian Garcia","4321","cgarcia","123456");
+        helper.populateDatabase();
+
 
         logInButton = (Button)findViewById(R.id.logInButton);
         logInButton.setOnClickListener(new View.OnClickListener()
@@ -50,7 +48,6 @@ public class MainActivity extends AppCompatActivity{
                    Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
                    e.printStackTrace();
                }
-               helper.closeDataBase();
            }
        }
         );
