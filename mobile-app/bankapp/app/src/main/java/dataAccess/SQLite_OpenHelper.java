@@ -15,7 +15,7 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper{
 
 
     public void onCreate(SQLiteDatabase db){
-        String query = "create table user(_ID integer primary key autoincrement, document text unique, name text, email text, password text, int balance);";
+        String query = "create table user(_ID integer primary key autoincrement, document text unique, name text, email text, password text, balance integer);";
         db.execSQL(query);
 
     }
