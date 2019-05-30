@@ -12,14 +12,12 @@ import android.widget.Toast;
 
 import com.example.bank_app.Presentation.UserWelcomeActivity;
 
-import java.security.Principal;
-
-import dataAccess.SQLite_OpenHelper;
+import com.example.bank_app.DataAccess.Database.Database;
 
 public class MainActivity extends AppCompatActivity{
 
     Button logInButton ;
-    SQLite_OpenHelper helper = new  SQLite_OpenHelper(this, "BD1", null, 1);
+    Database helper = new Database(this, "BD1", null, 1);
 
 
     protected void onCreate(Bundle savedInstanceState){
