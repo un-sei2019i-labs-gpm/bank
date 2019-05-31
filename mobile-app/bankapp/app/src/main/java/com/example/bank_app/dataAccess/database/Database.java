@@ -1,4 +1,4 @@
-package com.example.bank_app.DataAccess.Database;
+package com.example.bank_app.dataAccess;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,24 +7,18 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.bank_app.DataAccess.Models.User;
-
-public class Database extends SQLiteOpenHelper{
-    public Database(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
+public class SQLite_OpenHelper extends SQLiteOpenHelper{
+    public SQLite_OpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
         super(context, name, factory, version);
     }
 
 
     public void onCreate(SQLiteDatabase db){
-        String createUserTable = "create table User(_ID_user integer primary key autoincrement, document text unique not null, email text not null, password text not null,role text not null);";
-        db.execSQL(createUserTable);
-        String createAccountTable = "create table Account(_ID_account integer primary key autoincrement,_ID_user integer not null, balance integer not null ,foreign key (_ID_user) references User(_ID_user));";
-        db.execSQL(createAccountTable);
-        String  createTransaction ="create table Transac(_ID_transaction integer primary key autoincrement, time_of_transaction timestamp not null, id_transmiter integer not null, id_receiver integer not null, amount integer not null, foreign key (id_receiver) references User(_ID_user), foreign key (id_transmiter) references User(_ID_user));";
-        db.execSQL(createTransaction);
+        String query = "create table user(_ID integer primary key autoincrement, document text unique, name text, email text, password text, balance integer);";
+        db.execSQL(query);
 
     }
-    /*public void insertReg(String name, String doc, String email, String pas,int balance){
+    public void insertReg(String name, String doc, String email, String pas,int balance){
         ContentValues valores = new ContentValues();
         valores.put("document",doc);
         valores.put("name", name);
@@ -39,7 +33,7 @@ public class Database extends SQLiteOpenHelper{
         this.insertReg("Andres Moya","1018","afmoyar","123456",1000000);
         this.insertReg("Sergio Pineda","1234","saepinedave","123456",1000000);
         this.close();
-    }*/
+    }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion,int newVersion){
     }
@@ -57,15 +51,15 @@ public class Database extends SQLiteOpenHelper{
 
     //metodo para validar si el usuario existe
 
-    /*public Cursor validateCredentials(String doc, String pas) throws SQLException
+    public Cursor validateCredentials(String doc, String pas) throws SQLException
     {
         Cursor currentCursor = null;
-        currentCursor = this.getReadableDatabase().query("User", new String[] {"_ID",
+        currentCursor = this.getReadableDatabase().query("user", new String[] {"_ID",
                 "document","name", "email", "password","balance"}, "document like '"+doc+"'"+
                 "and password like '"+pas+"'", null, null, null, null);
 
         return currentCursor;
 
-    }*/
+    }
 
 }
