@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.example.bank_app.DataAccess.Models.User;
 
 public class Database extends SQLiteOpenHelper{
+
     public Database(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
         super(context, name, factory, version);
     }
