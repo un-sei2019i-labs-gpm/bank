@@ -12,12 +12,15 @@ public class SQLite_OpenHelper extends SQLiteOpenHelper{
         super(context, name, factory, version);
     }
 
-
     public void onCreate(SQLiteDatabase db){
-        String query = "create table user(_ID integer primary key autoincrement, document text unique, name text, email text, password text, balance integer);";
-        db.execSQL(query);
-
+        String createUserTable = "create table User(_ID_user integer primary key autoincrement, document text unique not null, email text not null, password text not null,role text not null);";
+        db.execSQL(createUserTable);
+        String createAccountTable = "create table Account(_ID_account integer primary key autoincrement,_ID_user integer not null, balance integer not null ,foreign key (_ID_user) references User(_ID_user));";
+        db.execSQL(createAccountTable);
+        String  createTransaction ="create table Transac(_ID_transaction integer primary key autoincrement, time_of_transaction timestamp not null, id_transmiter integer not null, id_receiver integer not null, amount integer not null, foreign key (id_receiver) references User(_ID_user), foreign key (id_transmiter) references User(_ID_user));";
+        db.execSQL(createTransaction);
     }
+    
     public void insertReg(String name, String doc, String email, String pas,int balance){
         ContentValues valores = new ContentValues();
         valores.put("document",doc);
