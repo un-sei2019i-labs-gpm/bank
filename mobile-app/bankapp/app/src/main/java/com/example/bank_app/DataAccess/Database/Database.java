@@ -16,10 +16,9 @@ public class Database extends SQLiteOpenHelper{
 
 
     public void onCreate(SQLiteDatabase db){
-        String createUserTable = "create table User(_ID_user integer primary key autoincrement, document text unique, email text, password text,role text);";
+        String createUserTable = "create table User(_ID_user integer primary key autoincrement, document text unique not null, email text not null, password text not null,role text not null);";
         db.execSQL(createUserTable);
-        String createAccountTable = "create table Account(_ID_account integer primary key autoincrement,ID_user text, balance integer ,foreign key ("+ID_user+") references "
-        User+"("+document+") );";
+        String createAccountTable = "create table Account(_ID_account integer primary key autoincrement,_ID_user integer not null, balance integer not null ,foreign key (_ID_user) references User(document));";
         db.execSQL(createAccountTable);
 
     }
