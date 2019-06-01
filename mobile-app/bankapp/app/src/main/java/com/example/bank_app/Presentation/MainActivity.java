@@ -1,4 +1,4 @@
-package com.example.bank_app;
+package com.example.bank_app.Presentation;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,9 +10,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.bank_app.DataAccess.Models.User;
+import com.example.bank_app.DataAccess.Repositories.UserRepository;
 import com.example.bank_app.Presentation.UserWelcomeActivity;
 
 import com.example.bank_app.DataAccess.Database.Database;
+import com.example.bank_app.R;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -23,10 +26,8 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //helper.populateDatabase();
-
-
+        UserRepository.createUser(helper,new User("afmoyar","123456","user","1018"));
+        UserRepository.createUser(helper,new User("email","123456","user","1234"));
         logInButton = (Button)findViewById(R.id.logInButton);
         logInButton.setOnClickListener(new View.OnClickListener()
        {
@@ -35,7 +36,6 @@ public class MainActivity extends AppCompatActivity{
                EditText paswordEditText =(EditText) findViewById(R.id.paswordEditText);
 
                try{
-/*
                    Cursor cursor = helper.validateCredentials(idEditText.getText().toString(), paswordEditText.getText().toString());
                    if(cursor.getCount()>0){
                        Toast.makeText(getApplicationContext(), "welcome", Toast.LENGTH_LONG).show();
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity{
                    }
                    idEditText.setText("");
                    paswordEditText.setText("");
-                   idEditText.findFocus();*/
+                   idEditText.findFocus();
                }catch(SQLException e){
                    Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
                    e.printStackTrace();
