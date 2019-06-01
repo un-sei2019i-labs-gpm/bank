@@ -8,6 +8,10 @@ public class User
     private String password;
     private String role;
 
+    public User()
+    {
+
+    }
     public User(int idUser, String eMail, String password, String role,String document) {
         this.idUser = idUser;
         this.eMail = eMail;
@@ -43,7 +47,7 @@ public class User
         return eMail;
     }
 
-    public void seteMail(String eMail) {
+    public void setEmail(String eMail) {
         this.eMail = eMail;
     }
 
@@ -61,5 +65,15 @@ public class User
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "document='" + document + '\'' +
+                ", eMail='" + eMail + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }
