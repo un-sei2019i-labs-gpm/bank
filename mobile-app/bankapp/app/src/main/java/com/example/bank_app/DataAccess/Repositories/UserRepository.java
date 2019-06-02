@@ -9,8 +9,8 @@ public class UserRepository
     private static boolean checkUserByDoc(Database helper,String doc)
     {
         Cursor currentCursor = null;
-        currentCursor = helper.getReadableDatabase().query("User", new String[] {"_ID_user",
-                "document","email", "password","role"}, "document like '"+doc+"'", null, null, null, null);
+        currentCursor = helper.getReadableDatabase().query("User",
+                new String[] {"_ID_user","email", "password","role"}, "_ID_user like '"+doc+"'", null, null, null, null);
         if(currentCursor.getCount()>0)
             return false;
         else
@@ -19,8 +19,8 @@ public class UserRepository
     private static Cursor queryByDoc(Database helper,String doc)
     {
         Cursor currentCursor = null;
-        currentCursor = helper.getReadableDatabase().query("User", new String[] {"_ID_user",
-                "document","email", "password","role"}, "document like '"+doc+"'", null, null, null, null);
+        currentCursor = helper.getReadableDatabase().query("User",
+                new String[] {"_ID_user","email", "password","role"}, "_ID_user like '"+doc+"'", null, null, null, null);
         return currentCursor;
     }
     public static void createUser(Database helper, User user)
@@ -28,7 +28,7 @@ public class UserRepository
         if(checkUserByDoc(helper,user.getDocument()))
         {
             ContentValues valores = new ContentValues();
-            valores.put("document",user.getDocument());
+            valores.put("_ID_user",user.getDocument());
             valores.put("email",user.geteMail());
             valores.put("password", user.getPassword());
             valores.put("role",user.getRole());
@@ -46,8 +46,6 @@ public class UserRepository
             currentCursor.moveToFirst();
             User userFound=new User();
             int index=currentCursor.getColumnIndex("_ID_user");
-            userFound.setIdUser(Integer.parseInt(currentCursor.getString(index)));
-            index=currentCursor.getColumnIndex("document");
             userFound.setDocument(currentCursor.getString(index));
             index=currentCursor.getColumnIndex("email");
             userFound.setEmail(currentCursor.getString(index));
@@ -63,7 +61,7 @@ public class UserRepository
             return null;
     }
 
-    public static boolean updateUser(Database helper,String doc, User upUser)
+    public static boolean updateUser(Database helper,String doc, User upUser)//searches user by doc and then replaces it with upUser
     {
         //returns true if the user by doc exists and the update valid, and false if there is no such user
 
@@ -71,11 +69,11 @@ public class UserRepository
         if(currentCursor.getCount()>0)
         {
             ContentValues values = new ContentValues();
-            values.put("document",upUser.getDocument());
+            values.put("_ID_user",upUser.getDocument());
             values.put("email",upUser.geteMail());
             values.put("password", upUser.getPassword());
             values.put("role",upUser.getRole());
-            String whereClause="document='"+doc+"'";
+            String whereClause="_ID_user='"+doc+"'";
             helper.getWritableDatabase().update("User",values,whereClause,null);
             helper.close();
             return true;
@@ -91,7 +89,7 @@ public class UserRepository
         Cursor currentCursor = queryByDoc(helper, doc);
         if(currentCursor.getCount()>0)
         {
-            helper.getWritableDatabase().delete("User","document='"+doc+"'",null);
+            helper.getWritableDatabase().delete("User","_ID_user='"+doc+"'",null);
             helper.close();
             return true;
         }

@@ -18,11 +18,11 @@ public class Database extends SQLiteOpenHelper{
 
 
     public void onCreate(SQLiteDatabase db){
-        String createUserTable = "create table User(_ID_user integer primary key autoincrement, document text unique not null, email text not null, password text not null,role text not null);";
+        String createUserTable = "create table User(_ID_user text primary key, email text not null, password text not null,role text not null);";
         db.execSQL(createUserTable);
-        String createAccountTable = "create table Account(_ID_account integer primary key autoincrement,_ID_user integer not null, balance integer not null ,foreign key (_ID_user) references User(_ID_user));";
+        String createAccountTable = "create table Account(_ID_account integer primary key autoincrement,_ID_user text not null, balance integer not null ,foreign key (_ID_user) references User(_ID_user));";
         db.execSQL(createAccountTable);
-        String  createTransaction ="create table Transac(_ID_transaction integer primary key autoincrement, time_of_transaction date not null, id_transmiter integer not null, id_receiver integer not null, amount integer not null, foreign key (id_receiver) references User(_ID_user), foreign key (id_transmiter) references User(_ID_user));";
+        String  createTransaction ="create table Transac(_ID_transaction integer primary key autoincrement, time_of_transaction date not null, id_transmiter text not null, id_receiver text not null, amount integer not null, foreign key (id_receiver) references User(_ID_user), foreign key (id_transmiter) references User(_ID_user));";
         db.execSQL(createTransaction);
 
 
@@ -67,8 +67,7 @@ public class Database extends SQLiteOpenHelper{
     public Cursor validateCredentials(String doc, String pas) throws SQLException
     {
         Cursor currentCursor = null;
-        currentCursor = this.getReadableDatabase().query("User", new String[] {"_ID_user",
-                "document","email", "password","role"}, "document like '"+doc+"'"+
+        currentCursor = this.getReadableDatabase().query("User", new String[] {"_ID_user","email", "password","role"}, "_ID_user like '"+doc+"'"+
                 "and password like '"+pas+"'", null, null, null, null);
 
         return currentCursor;

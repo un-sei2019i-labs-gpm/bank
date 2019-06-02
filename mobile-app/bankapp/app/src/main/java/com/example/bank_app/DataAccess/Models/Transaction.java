@@ -2,33 +2,33 @@ package com.example.bank_app.DataAccess.Models;
 
 public class Transaction
 {
-    private int idTransactiom;
+    private int idTransaction;
     private String timeOfTransaction;
-    private int idTransmitter;
-    private int idReceiver;
-    private int ammount;
+    private String idTransmitter;
+    private String idReceiver;
+    private int amount;
 
-    public Transaction(int idTransactiom, String timeOfTransaction, int idTransmitter, int idReceiver, int ammount) {
-        this.idTransactiom = idTransactiom;
+    public Transaction(int idTransaction, String timeOfTransaction, String idTransmitter, String idReceiver, int amount) {
+        this.idTransaction = idTransaction;
         this.timeOfTransaction = timeOfTransaction;
         this.idTransmitter = idTransmitter;
         this.idReceiver = idReceiver;
-        this.ammount = ammount;
+        this.amount = amount;
     }
 
-    public Transaction( String timeOfTransaction, int idTransmitter, int idReceiver, int ammount) {
+    public Transaction( String timeOfTransaction, String idTransmitter, String idReceiver, int amount) {
         this.timeOfTransaction = timeOfTransaction;
         this.idTransmitter = idTransmitter;
         this.idReceiver = idReceiver;
-        this.ammount = ammount;
+        this.amount = amount;
     }
 
-    public int getIdTransactiom() {
-        return idTransactiom;
+    public int getIdTransaction() {
+        return idTransaction;
     }
 
-    public void setIdTransactiom(int idTransactiom) {
-        this.idTransactiom = idTransactiom;
+    public void setIdTransaction(int idTransaction) {
+        this.idTransaction = idTransaction;
     }
 
     public String getTimeOfTransaction() {
@@ -39,27 +39,27 @@ public class Transaction
         this.timeOfTransaction = timeOfTransaction;
     }
 
-    public int getIdTransmitter() {
+    public String getIdTransmitter() {
         return idTransmitter;
     }
 
-    public void setIdTransmitter(int idTransmitter) {
+    public void setIdTransmitter(String idTransmitter) {
         this.idTransmitter = idTransmitter;
     }
 
-    public int getIdReceiver() {
+    public String getIdReceiver() {
         return idReceiver;
     }
 
-    public void setIdReceiver(int idReceiver) {
+    public void setIdReceiver(String idReceiver) {
         this.idReceiver = idReceiver;
     }
 
     public int getAmmount() {
-        return ammount;
+        return amount;
     }
 
-    public void setAmmount(int ammount) {
-        this.ammount = ammount;
+    public void setAmmount(int amount) {
+        this.amount = amount;
     }
 }

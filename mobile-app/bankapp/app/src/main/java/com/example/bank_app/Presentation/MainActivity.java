@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity{
                EditText paswordEditText =(EditText) findViewById(R.id.paswordEditText);
 
                try{
+
                    Cursor cursor = helper.validateCredentials(idEditText.getText().toString(), paswordEditText.getText().toString());
                    if(cursor.getCount()>0){
                        Toast.makeText(getApplicationContext(), "welcome", Toast.LENGTH_LONG).show();
@@ -47,6 +48,15 @@ public class MainActivity extends AppCompatActivity{
                    idEditText.setText("");
                    paswordEditText.setText("");
                    idEditText.findFocus();
+/*
+                   User myUser=UserRepository.getUserByDoc(helper,"1018");
+                   if(myUser!=null)
+                   {
+                       Toast.makeText(getApplicationContext(), myUser.toString(), Toast.LENGTH_LONG).show();
+                   }
+                   else
+                       Toast.makeText(getApplicationContext(), "not found", Toast.LENGTH_LONG).show();
+*/
                }catch(SQLException e){
                    Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
                    e.printStackTrace();
