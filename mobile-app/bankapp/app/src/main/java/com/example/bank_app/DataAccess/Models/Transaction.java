@@ -1,41 +1,43 @@
 package com.example.bank_app.DataAccess.Models;
 
+import java.util.Date;
+
 public class Transaction
 {
-    private int idTransactiom;
-    private String timeOfTransaction;
+    private int idTransaction;
+    private Date timeOfTransaction;
     private int idTransmitter;
     private int idReceiver;
     private int ammount;
 
-    public Transaction(int idTransactiom, String timeOfTransaction, int idTransmitter, int idReceiver, int ammount) {
-        this.idTransactiom = idTransactiom;
+    public Transaction(int idTransactiom, Date timeOfTransaction, int idTransmitter, int idReceiver, int ammount) {
+        this.idTransaction = idTransactiom;
         this.timeOfTransaction = timeOfTransaction;
         this.idTransmitter = idTransmitter;
         this.idReceiver = idReceiver;
         this.ammount = ammount;
     }
 
-    public Transaction( String timeOfTransaction, int idTransmitter, int idReceiver, int ammount) {
+    public Transaction( Date timeOfTransaction, int idTransmitter, int idReceiver, int ammount) {
         this.timeOfTransaction = timeOfTransaction;
         this.idTransmitter = idTransmitter;
         this.idReceiver = idReceiver;
         this.ammount = ammount;
     }
 
-    public int getIdTransactiom() {
-        return idTransactiom;
+    public int getIdTransaction() {
+        return idTransaction;
     }
 
-    public void setIdTransactiom(int idTransactiom) {
-        this.idTransactiom = idTransactiom;
+    public void setIdTransaction(int idTransaction) {
+        this.idTransaction = idTransaction;
     }
 
-    public String getTimeOfTransaction() {
+    public Date getTimeOfTransaction() {
         return timeOfTransaction;
     }
 
-    public void setTimeOfTransaction(String timeOfTransaction) {
+    public void setTimeOfTransaction(Date timeOfTransaction) {
         this.timeOfTransaction = timeOfTransaction;
     }
 
