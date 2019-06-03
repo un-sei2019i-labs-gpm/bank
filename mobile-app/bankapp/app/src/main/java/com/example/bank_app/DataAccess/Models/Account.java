@@ -3,10 +3,15 @@ package com.example.bank_app.DataAccess.Models;
 public class Account
 {
     private int accountNumber;
-    private int idUser;
+    private String idUser;
     private int balance;
 
-    public Account(int accountNumber, int idUser, int balance) {
+    public Account(){
+
+
+    }
+
+    public Account(int accountNumber, String idUser, int balance) {
         this.accountNumber = accountNumber;
         this.idUser = idUser;
         this.balance = balance;
@@ -25,11 +30,11 @@ public class Account
         this.accountNumber = accountNumber;
     }
 
-    public int getIdUser() {
+    public String getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(int idUser) {
+    public void setIdUser(String idUser) {
         this.idUser = idUser;
     }
 
