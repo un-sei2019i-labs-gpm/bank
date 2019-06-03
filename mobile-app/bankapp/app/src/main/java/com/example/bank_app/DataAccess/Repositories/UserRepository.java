@@ -1,21 +1,27 @@
 package com.example.bank_app.DataAccess.Repositories;
 import android.content.ContentValues;
 import android.database.Cursor;
+
 import com.example.bank_app.DataAccess.Database.Database;
 import com.example.bank_app.DataAccess.Models.User;
 
 public class UserRepository
 {
+    public UserRepository(){
+
+    }
+
     private static boolean checkUserByDoc(Database helper,String doc)
     {
-        Cursor currentCursor = null;
-        currentCursor = helper.getReadableDatabase().query("User",
-                new String[] {"_ID_user","email", "password","role"}, "_ID_user like '"+doc+"'", null, null, null, null);
+        Cursor currentCursor = helper.getReadableDatabase().query("User", new String[]
+                        {"document", "email", "password","role"}, "document like '"+doc+"'",
+                        null, null, null, null);
         if(currentCursor.getCount()>0)
             return false;
         else
             return true;
     }
+
     private static Cursor queryByDoc(Database helper,String doc)
     {
         Cursor currentCursor = null;
@@ -23,8 +29,10 @@ public class UserRepository
                 new String[] {"_ID_user","email", "password","role"}, "_ID_user like '"+doc+"'", null, null, null, null);
         return currentCursor;
     }
+
     public static void createUser(Database helper, User user)
     {
+
         if(checkUserByDoc(helper,user.getDocument()))
         {
             ContentValues valores = new ContentValues();
@@ -36,6 +44,7 @@ public class UserRepository
             helper.close();
         }
     }
+
     public static User getUserByDoc(Database helper,String doc)
     {
         //returns a user object with the info of the query, if there is not such user, returns null
@@ -45,7 +54,7 @@ public class UserRepository
         {
             currentCursor.moveToFirst();
             User userFound=new User();
-            int index=currentCursor.getColumnIndex("_ID_user");
+            int index=currentCursor.getColumnIndex("document");
             userFound.setDocument(currentCursor.getString(index));
             index=currentCursor.getColumnIndex("email");
             userFound.setEmail(currentCursor.getString(index));

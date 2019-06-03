@@ -2,6 +2,7 @@ package com.example.bank_app.DataAccess.Models;
 
 public class User
 {
+
     private String document;
     private String eMail;
     private String password;
@@ -10,6 +11,13 @@ public class User
     public User()
     {
 
+    }
+
+    public User(int idUser, String eMail, String password, String role,String document) {
+        this.eMail = eMail;
+        this.password = password;
+        this.role = role;
+        this.document=document;
     }
 
     public User(String eMail, String password, String role,String document) {

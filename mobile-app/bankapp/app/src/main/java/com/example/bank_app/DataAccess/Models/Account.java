@@ -6,6 +6,11 @@ public class Account
     private String idUser;
     private int balance;
 
+    public Account(){
+
+
+    }
+
     public Account(int accountNumber, String idUser, int balance) {
         this.accountNumber = accountNumber;
         this.idUser = idUser;

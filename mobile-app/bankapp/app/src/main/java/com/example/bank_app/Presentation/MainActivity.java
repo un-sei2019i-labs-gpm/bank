@@ -22,48 +22,34 @@ public class MainActivity extends AppCompatActivity{
     Button logInButton ;
     Database helper = new Database(this, "BD1", null, 1);
 
-
     protected void onCreate(Bundle savedInstanceState){
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         UserRepository.createUser(helper,new User("afmoyar","123456","user","1018"));
         UserRepository.createUser(helper,new User("email","123456","user","1234"));
         logInButton = (Button)findViewById(R.id.logInButton);
+
         logInButton.setOnClickListener(new View.OnClickListener()
        {
-           public void onClick(View v){
-               EditText idEditText =(EditText) findViewById(R.id.idEditText);
-               EditText paswordEditText =(EditText) findViewById(R.id.paswordEditText);
 
-               try{
-
-                   Cursor cursor = helper.validateCredentials(idEditText.getText().toString(), paswordEditText.getText().toString());
-                   if(cursor.getCount()>0){
-                       Toast.makeText(getApplicationContext(), "welcome", Toast.LENGTH_LONG).show();
-                       Intent i = new Intent(getApplicationContext(), UserWelcomeActivity.class);
-                       startActivity(i);
-                   }else{
-                       Toast.makeText(getApplicationContext(), "wrong credentials, try again", Toast.LENGTH_LONG).show();
-                   }
-                   idEditText.setText("");
-                   paswordEditText.setText("");
-                   idEditText.findFocus();
-/*
-                   User myUser=UserRepository.getUserByDoc(helper,"1018");
-                   if(myUser!=null)
-                   {
-                       Toast.makeText(getApplicationContext(), myUser.toString(), Toast.LENGTH_LONG).show();
-                   }
-                   else
-                       Toast.makeText(getApplicationContext(), "not found", Toast.LENGTH_LONG).show();
-*/
-               }catch(SQLException e){
-                   Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
-                   e.printStackTrace();
-               }
+           public void onClick (View v){
+            EditText idEditText = (EditText) findViewById(R.id.idEditText);
+            EditText paswordEditText = (EditText) findViewById(R.id.paswordEditText);
+            Cursor cursor = helper.validateCredentials(idEditText.getText().toString(), paswordEditText.getText().toString());
+            if (cursor.getCount() > 0) {
+                Toast.makeText(getApplicationContext(), "welcome", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(getApplicationContext(), UserWelcomeActivity.class);
+                startActivity(i);
+            } else {
+                Toast.makeText(getApplicationContext(), "wrong credentials, try again", Toast.LENGTH_LONG).show();
+            }
+            idEditText.setText("");
+            paswordEditText.setText("");
+            idEditText.findFocus();
            }
        }
         );
-
     }
 }
