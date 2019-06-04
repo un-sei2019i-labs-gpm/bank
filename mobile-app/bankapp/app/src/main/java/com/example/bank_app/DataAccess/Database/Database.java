@@ -18,11 +18,18 @@ public class Database extends SQLiteOpenHelper{
 
 
     public void onCreate(SQLiteDatabase db){
-        String createUserTable = "create table User(document text primary key, email text not null, password text not null,role text not null);";
+        String createUserTable = "create table User(document text primary key, " +
+                "email text not null, password text not null,role text not null);";
         db.execSQL(createUserTable);
-        String createAccountTable = "create table Account(_ID_account integer primary key autoincrement,_ID_user text not null, balance integer not null ,foreign key (_ID_user) references User(document));";
+        String createAccountTable = "create table Account" +
+                "(_ID_account integer primary key autoincrement,_ID_user text not null, " +
+                "balance integer not null ,foreign key (_ID_user) references User(document));";
         db.execSQL(createAccountTable);
-        String  createTransaction ="create table Transac(_ID_transaction integer primary key autoincrement, time_of_transaction date not null, id_transmiter text not null, id_receiver text not null, amount integer not null, foreign key (id_receiver) references User(_ID_user), foreign key (id_transmiter) references User(_ID_user));";
+        String  createTransaction ="create table Transac" +
+                "(_ID_transaction integer primary key autoincrement," +
+                " time_of_transaction date not null, id_transmiter text not null, " +
+                "id_receiver text not null, amount integer not null, foreign key (id_receiver) " +
+                "references User(_ID_user), foreign key (id_transmiter) references User(_ID_user));";
         db.execSQL(createTransaction);
     }
     /*

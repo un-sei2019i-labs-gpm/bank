@@ -10,7 +10,8 @@ public class Transaction
     private int idReceiver;
     private int amount;
 
-    public Transaction(int idTransactiom, Date timeOfTransaction, int idTransmitter, int idReceiver, int amount) {
+    public Transaction(int idTransactiom, Date timeOfTransaction, int idTransmitter,
+                       int idReceiver, int amount) {
         this.idTransaction = idTransactiom;
         this.timeOfTransaction = timeOfTransaction;
         this.idTransmitter = idTransmitter;
