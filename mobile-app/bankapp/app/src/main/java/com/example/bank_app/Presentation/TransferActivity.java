@@ -16,12 +16,10 @@ public class TransferActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tansfer);
 
-        Spinner spinner=(Spinner) findViewById(R.id.spinner);
+        EditText transferAccountEditText=(EditText) findViewById(R.id.transferAccountEditText);
         EditText transferAmountEditText=(EditText) findViewById(R.id.transferAmountEditText);
-        Button dd=(Button) findViewById(R.id.sendButton);
+        Button sendButton=(Button) findViewById(R.id.sendButton);
 
-        String[] llenarSpinnerPrueba=new String[]{"user"};
-        ArrayAdapter adap=new ArrayAdapter(this,android.R.layout.simple_spinner_item,llenarSpinnerPrueba);
-        spinner.setAdapter(adap);
+
     }
 }
