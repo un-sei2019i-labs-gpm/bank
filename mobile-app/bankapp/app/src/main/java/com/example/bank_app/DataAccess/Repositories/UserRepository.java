@@ -13,9 +13,7 @@ public class UserRepository
 
     private static boolean checkUserByDoc(Database helper,String doc)
     {
-        Cursor currentCursor = helper.getReadableDatabase().query("User", new String[]
-                        {"document", "email", "password","role"}, "document like '"+doc+"'",
-                        null, null, null, null);
+        Cursor currentCursor = helper.getReadableDatabase().query("User", new String[]{"_ID_user", "email", "password","role"}, "_ID_user like '"+doc+"'", null, null, null, null);
         if(currentCursor.getCount()>0)
             return false;
         else
@@ -54,7 +52,7 @@ public class UserRepository
         {
             currentCursor.moveToFirst();
             User userFound=new User();
-            int index=currentCursor.getColumnIndex("document");
+            int index=currentCursor.getColumnIndex("_ID_user");
             userFound.setDocument(currentCursor.getString(index));
             index=currentCursor.getColumnIndex("email");
             userFound.setEmail(currentCursor.getString(index));

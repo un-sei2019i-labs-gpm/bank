@@ -72,8 +72,8 @@ public class Database extends SQLiteOpenHelper{
     public Cursor validateCredentials(String doc, String pas) throws SQLException
     {
         Cursor currentCursor = null;
-        currentCursor = this.getReadableDatabase().query("User", new String[] {"document",
-                "email", "password","role"}, "document like '"+doc+"'"+"and password like '"+pas+"'",
+        currentCursor = this.getReadableDatabase().query("User", new String[] {"_ID_user",
+                "email", "password","role"}, "_ID_user like '"+doc+"'"+"and password like '"+pas+"'",
                 null, null, null, null);
 
         return currentCursor;
