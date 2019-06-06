@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity{
             if (cursor.getCount() > 0) {
                 Toast.makeText(getApplicationContext(), "welcome", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), UserWelcomeActivity.class);
+                i.putExtra("mainToWelcomeCurrentUser",idEditText.getText().toString());
                 startActivity(i);
             } else {
                 Toast.makeText(getApplicationContext(), "wrong credentials, try again", Toast.LENGTH_LONG).show();

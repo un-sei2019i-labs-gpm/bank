@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.bank_app.R;
 
@@ -16,12 +17,11 @@ public class TransferActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tansfer);
 
-        Spinner spinner=(Spinner) findViewById(R.id.spinner);
+        EditText transferAccountEditText=(EditText) findViewById(R.id.transferAccountEditText);
         EditText transferAmountEditText=(EditText) findViewById(R.id.transferAmountEditText);
-        Button dd=(Button) findViewById(R.id.sendButton);
+        Button sendButton=(Button) findViewById(R.id.sendButton);
+        final String currentUserId=getIntent().getExtras().getString("WelcomeToTransferCurrentUser");
+        Toast.makeText(getApplicationContext(), currentUserId, Toast.LENGTH_LONG).show();
 
-        String[] llenarSpinnerPrueba=new String[]{"user"};
-        ArrayAdapter adap=new ArrayAdapter(this,android.R.layout.simple_spinner_item,llenarSpinnerPrueba);
-        spinner.setAdapter(adap);
     }
 }
