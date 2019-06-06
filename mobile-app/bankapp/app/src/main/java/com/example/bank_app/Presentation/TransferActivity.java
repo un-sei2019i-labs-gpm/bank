@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.bank_app.R;
 
@@ -19,7 +20,8 @@ public class TransferActivity extends AppCompatActivity {
         EditText transferAccountEditText=(EditText) findViewById(R.id.transferAccountEditText);
         EditText transferAmountEditText=(EditText) findViewById(R.id.transferAmountEditText);
         Button sendButton=(Button) findViewById(R.id.sendButton);
-
+        final String currentUserId=getIntent().getExtras().getString("WelcomeToTransferCurrentUser");
+        Toast.makeText(getApplicationContext(), currentUserId, Toast.LENGTH_LONG).show();
 
     }
 }

@@ -18,12 +18,14 @@ public class UserWelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_welcome);
 
+        final String currentUserId=getIntent().getExtras().getString("mainToWelcomeCurrentUser");
         TextView currentBalanceTextView=(TextView) findViewById(R.id.currentBalanceTextView);
         Button transferButton=(Button) findViewById(R.id.transferButton);
         transferButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(getApplicationContext(), TransferActivity.class);
+                i.putExtra("WelcomeToTransferCurrentUser",currentUserId);
                 startActivity(i);
             }
         });
