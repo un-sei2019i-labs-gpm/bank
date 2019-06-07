@@ -1,5 +1,6 @@
 package com.example.bank_app.DataAccess.Repositories;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 
 import com.example.bank_app.DataAccess.Database.Database;
@@ -10,9 +11,9 @@ public class UserRepository
     public UserRepository(){
 
     }
-
-    private static boolean checkUserByDoc(Database helper,String doc)
+    private static boolean checkUserByDoc(Context context, String doc)
     {
+        Database helper=Database.createHelper(context);
         Cursor currentCursor = helper.getReadableDatabase().query("User", new String[]{"_ID_user", "email", "password","role"}, "_ID_user like '"+doc+"'", null, null, null, null);
         if(currentCursor.getCount()>0)
             return false;
@@ -20,18 +21,20 @@ public class UserRepository
             return true;
     }
 
-    private static Cursor queryByDoc(Database helper,String doc)
+    private static Cursor queryByDoc(Context context,String doc)
     {
+        Database helper=Database.createHelper(context);
         Cursor currentCursor = null;
         currentCursor = helper.getReadableDatabase().query("User",
                 new String[] {"_ID_user","email", "password","role"}, "_ID_user like '"+doc+"'", null, null, null, null);
         return currentCursor;
     }
 
-    public static void createUser(Database helper, User user)
+    public static void createUser(Context context, User user)
     {
 
-        if(checkUserByDoc(helper,user.getDocument()))
+        Database helper=Database.createHelper(context);
+        if(checkUserByDoc(context,user.getDocument()))
         {
             ContentValues valores = new ContentValues();
             valores.put("_ID_user",user.getDocument());
@@ -43,11 +46,11 @@ public class UserRepository
         }
     }
 
-    public static User getUserByDoc(Database helper,String doc)
+    public static User getUserByDoc(Context context,String doc)
     {
         //returns a user object with the info of the query, if there is not such user, returns null
-
-        Cursor currentCursor = queryByDoc(helper, doc);
+        Database helper=Database.createHelper(context);
+        Cursor currentCursor = queryByDoc(context, doc);
         if(currentCursor.getCount()>0)
         {
             currentCursor.moveToFirst();
@@ -68,11 +71,11 @@ public class UserRepository
             return null;
     }
 
-    public static boolean updateUser(Database helper,String doc, User upUser)//searches user by doc and then replaces it with upUser
+    public static boolean updateUser(Context context,String doc, User upUser)//searches user by doc and then replaces it with upUser
     {
         //returns true if the user by doc exists and the update valid, and false if there is no such user
-
-        Cursor currentCursor = queryByDoc(helper, doc);
+        Database helper=Database.createHelper(context);
+        Cursor currentCursor = queryByDoc(context, doc);
         if(currentCursor.getCount()>0)
         {
             ContentValues values = new ContentValues();
@@ -89,11 +92,11 @@ public class UserRepository
             return false;
     }
 
-    public static boolean deleteUser(Database helper,String doc)
+    public static boolean deleteUser(Context context,String doc)
     {
         //returns true if the user by doc exists and the update valid, and false if there is no such user
-
-        Cursor currentCursor = queryByDoc(helper, doc);
+        Database helper=Database.createHelper(context);
+        Cursor currentCursor = queryByDoc(context, doc);
         if(currentCursor.getCount()>0)
         {
             helper.getWritableDatabase().delete("User","_ID_user='"+doc+"'",null);

@@ -32,6 +32,11 @@ public class Database extends SQLiteOpenHelper{
                 "references User(_ID_user), foreign key (id_transmiter) references User(_ID_user));";
         db.execSQL(createTransaction);
     }
+    public static Database createHelper(Context context)
+    {
+        Database helper = new Database(context, "BD1", null, 1);
+        return helper;
+    }
     /*
     public void insertReg(String name, String doc, String email, String pas,String role){
         ContentValues valores = new ContentValues();

@@ -1,5 +1,6 @@
 package com.example.bank_app.Presentation;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -20,15 +21,13 @@ import com.example.bank_app.R;
 public class MainActivity extends AppCompatActivity{
 
     Button logInButton ;
-    Database helper = new Database(this, "BD1", null, 1);
-
     protected void onCreate(Bundle savedInstanceState){
 
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        UserRepository.createUser(helper,new User("afmoyar","123456","user","1018"));
-        UserRepository.createUser(helper,new User("email","123456","user","1234"));
+        UserRepository.createUser(this,new User("afmoyar","123456","user","1018"));
+        UserRepository.createUser(this,new User("email","123456","user","1234"));
         logInButton = (Button)findViewById(R.id.logInButton);
 
         logInButton.setOnClickListener(new View.OnClickListener()
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity{
            public void onClick (View v){
             EditText idEditText = (EditText) findViewById(R.id.idEditText);
             EditText paswordEditText = (EditText) findViewById(R.id.paswordEditText);
-            Cursor cursor = helper.validateCredentials(idEditText.getText().toString(), paswordEditText.getText().toString());
+            Cursor cursor = Database.createHelper(getApplicationContext()).validateCredentials(idEditText.getText().toString(), paswordEditText.getText().toString());
             if (cursor.getCount() > 0) {
                 Toast.makeText(getApplicationContext(), "welcome", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), UserWelcomeActivity.class);
