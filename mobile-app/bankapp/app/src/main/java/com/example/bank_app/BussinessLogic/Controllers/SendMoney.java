@@ -1,4 +1,4 @@
-package com.example.bank_app.BussinessLogic;
+package com.example.bank_app.BussinessLogic.Controllers;
 
 import android.content.Context;
 import android.database.Cursor;

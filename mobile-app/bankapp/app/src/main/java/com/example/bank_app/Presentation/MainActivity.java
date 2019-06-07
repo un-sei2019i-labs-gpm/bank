@@ -1,9 +1,6 @@
 package com.example.bank_app.Presentation;
 
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.SQLException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,12 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.bank_app.BussinessLogic.SendMoney;
-import com.example.bank_app.DataAccess.Models.User;
-import com.example.bank_app.DataAccess.Repositories.UserRepository;
-import com.example.bank_app.Presentation.UserWelcomeActivity;
+import com.example.bank_app.BussinessLogic.Controllers.SendMoney;
 
-import com.example.bank_app.DataAccess.Database.Database;
 import com.example.bank_app.R;
 
 public class MainActivity extends AppCompatActivity{
@@ -37,8 +30,8 @@ public class MainActivity extends AppCompatActivity{
             boolean logIn=SendMoney.logIn(getApplicationContext(),idEditText.getText().toString(), paswordEditText.getText().toString());
             if (logIn) {
                 Toast.makeText(getApplicationContext(), "welcome", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(getApplicationContext(), UserWelcomeActivity.class);
-                i.putExtra("mainToWelcomeCurrentUser",idEditText.getText().toString());
+                Intent i = new Intent(getApplicationContext(), TransferActivity.class);
+                i.putExtra("mainToTransfer",idEditText.getText().toString());
                 startActivity(i);
             } else {
                 Toast.makeText(getApplicationContext(), "wrong credentials, try again", Toast.LENGTH_LONG).show();
