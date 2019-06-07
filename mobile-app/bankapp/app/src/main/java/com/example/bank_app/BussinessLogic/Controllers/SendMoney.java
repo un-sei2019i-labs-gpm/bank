@@ -16,6 +16,12 @@ public class SendMoney
         return account.getBalance();
 
     }
+    public static int fetchAccNumber(Context context, String idUser)
+    {
+        Account account=AccountRepository.getAccountByUser(context,idUser);
+        return account.getAccountNumber();
+
+    }
 
     public static void populateDataBase(Context context)
     {
@@ -42,7 +48,7 @@ public class SendMoney
                 Account accRec = AccountRepository.getAccountByAcc(context, accReceiver);
                 Account accTrans = AccountRepository.getAccountByAcc(context, accTransmitter);
                 accRec.setBalance(accRec.getBalance() + amount);
-                accRec.setBalance(accTrans.getBalance() - amount);
+                accTrans.setBalance(accTrans.getBalance() - amount);
                 AccountRepository.updateAccountBalance(context, accRec);
                 AccountRepository.updateAccountBalance(context, accTrans);
                 return true;

@@ -18,9 +18,9 @@ public class AccountRepository {
                 {"_ID_account", "_ID_user","balance"}, "_ID_account like '"+accId+"'",
                 null, null, null, null);
         if(cursor.getCount()>0)
-            return false;
-        else
             return true;
+        else
+            return false;
     }
 
     private static boolean checkAccByUsr(Context context, String usrID){
@@ -30,9 +30,9 @@ public class AccountRepository {
                 {"_ID_account", "_ID_user","balance"}, "_ID_user like '"+usrID+"'",
                 null, null, null, null);
         if(cursor.getCount()>0)
-            return false;
-        else
             return true;
+        else
+            return false;
     }
 
     private static Cursor queryByUsr(Context context, String usrDoc)
@@ -57,7 +57,7 @@ public class AccountRepository {
     {
         Database helper=Database.createHelper(context);
 
-        if(checkAccByUsr(context, account.getIdUser())){
+        if(!checkAccByUsr(context, account.getIdUser())){
 
             ContentValues valores = new ContentValues();
             valores.put("_ID_user",account.getIdUser());
