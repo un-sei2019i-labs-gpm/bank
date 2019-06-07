@@ -10,6 +10,10 @@ import android.widget.Toast;
 
 import com.example.bank_app.BussinessLogic.Controllers.SendMoney;
 
+import com.example.bank_app.DataAccess.Models.Account;
+import com.example.bank_app.DataAccess.Models.User;
+import com.example.bank_app.DataAccess.Repositories.AccountRepository;
+import com.example.bank_app.DataAccess.Repositories.UserRepository;
 import com.example.bank_app.R;
 
 public class MainActivity extends AppCompatActivity{

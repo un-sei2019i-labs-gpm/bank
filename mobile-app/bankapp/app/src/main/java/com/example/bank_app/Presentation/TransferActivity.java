@@ -9,6 +9,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bank_app.BussinessLogic.Controllers.SendMoney;
 import com.example.bank_app.R;
 
 public class TransferActivity extends AppCompatActivity {
@@ -23,7 +24,6 @@ public class TransferActivity extends AppCompatActivity {
         EditText transferAmountEditText=(EditText) findViewById(R.id.transferAmountEditText);
         Button sendButton=(Button) findViewById(R.id.sendButton);
         final String currentUserId=getIntent().getExtras().getString("mainToTransfer");
-        Toast.makeText(getApplicationContext(), currentUserId, Toast.LENGTH_LONG).show();
-
+        currentBalanceTextView.setText(""+SendMoney.fetchBalance(this,currentUserId));
     }
 }

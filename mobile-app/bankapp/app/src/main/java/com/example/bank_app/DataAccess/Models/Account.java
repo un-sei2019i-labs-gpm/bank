@@ -46,5 +46,12 @@ public class Account
         this.balance = balance;
     }
 
-
+    @Override
+    public String toString() {
+        return "Account{" +
+                "accountNumber=" + accountNumber +
+                ", idUser='" + idUser + '\'' +
+                ", balance=" + balance +
+                '}';
+    }
 }
