@@ -17,8 +17,8 @@ public class Account
         this.balance = balance;
     }
 
-    public Account(int accountNumber, int balance) {
-        this.accountNumber = accountNumber;
+    public Account(String idUser, int balance) {
+        this.idUser = idUser;
         this.balance = balance;
     }
 
