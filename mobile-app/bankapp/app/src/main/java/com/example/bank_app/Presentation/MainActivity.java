@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity{
            public void onClick (View v){
             EditText idEditText = (EditText) findViewById(R.id.idEditText);
             EditText paswordEditText = (EditText) findViewById(R.id.paswordEditText);
-            Cursor cursor=UserRepository.validateCredentials(getApplicationContext(),idEditText.getText().toString(), paswordEditText.getText().toString());
-            if (cursor.getCount() > 0) {
+            boolean logIn=SendMoney.logIn(getApplicationContext(),idEditText.getText().toString(), paswordEditText.getText().toString());
+            if (logIn) {
                 Toast.makeText(getApplicationContext(), "welcome", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), UserWelcomeActivity.class);
                 i.putExtra("mainToWelcomeCurrentUser",idEditText.getText().toString());

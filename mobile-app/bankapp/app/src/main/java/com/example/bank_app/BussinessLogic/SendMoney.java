@@ -1,6 +1,7 @@
 package com.example.bank_app.BussinessLogic;
 
 import android.content.Context;
+import android.database.Cursor;
 
 import com.example.bank_app.DataAccess.Models.Account;
 import com.example.bank_app.DataAccess.Models.User;
@@ -12,6 +13,14 @@ public class SendMoney
     {
         UserRepository.createUser(context,new User("afmoyar","123456","user","1018"));
         UserRepository.createUser(context,new User("email","123456","user","1234"));
+    }
+    public static boolean logIn(Context context, String userId, String password)
+    {
+        Cursor cursor=UserRepository.validateCredentials(context,userId, password);
+        if(cursor.getCount() > 0)
+            return true;
+        else
+            return false;
     }
     public  static boolean sendMoney(Account transfer, Account receiver, int amount)
     {
