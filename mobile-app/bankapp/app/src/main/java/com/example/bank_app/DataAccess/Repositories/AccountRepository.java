@@ -12,15 +12,15 @@ public class AccountRepository {
 
     }
 
-    private static boolean checkAccByID(Context context, int accId){
+    public static boolean checkAccByID(Context context, int accId){
         Database helper=Database.createHelper(context);
         Cursor cursor = helper.getReadableDatabase().query("Account", new String[]
                 {"_ID_account", "_ID_user","balance"}, "_ID_account like '"+accId+"'",
                 null, null, null, null);
         if(cursor.getCount()>0)
-            return false;
-        else
             return true;
+        else
+            return false;
     }
 
     private static boolean checkAccByUsr(Context context, String usrID){
@@ -30,9 +30,9 @@ public class AccountRepository {
                 {"_ID_account", "_ID_user","balance"}, "_ID_user like '"+usrID+"'",
                 null, null, null, null);
         if(cursor.getCount()>0)
-            return false;
-        else
             return true;
+        else
+            return false;
     }
 
     private static Cursor queryByUsr(Context context, String usrDoc)
@@ -44,9 +44,9 @@ public class AccountRepository {
         return currentCursor;
     }
 
-    private static Cursor queryByAccountId(Database helper, String accID)
+    private static Cursor queryByAccountId(Context context, int accID)
     {
-
+        Database helper=Database.createHelper(context);
         Cursor currentCursor = helper.getReadableDatabase().query("Account", new String[]
                 {"_ID_account", "_ID_user","balance"}, "_ID_account like '"+accID+"'",
                 null, null, null, null);
@@ -57,7 +57,7 @@ public class AccountRepository {
     {
         Database helper=Database.createHelper(context);
 
-        if(checkAccByUsr(context, account.getIdUser())){
+        if(!checkAccByUsr(context, account.getIdUser())){
 
             ContentValues valores = new ContentValues();
             valores.put("_ID_user",account.getIdUser());
@@ -71,6 +71,27 @@ public class AccountRepository {
     {
         Database helper=Database.createHelper(context);
         Cursor currentCursor = queryByUsr(context, usrDoc);
+        if(currentCursor.getCount()>0)
+        {
+            currentCursor.moveToFirst();
+            Account accFound=new Account();
+            int index=currentCursor.getColumnIndex("_ID_account");
+            accFound.setAccountNumber(Integer.parseInt(currentCursor.getString(index)));
+            index=currentCursor.getColumnIndex("_ID_user");
+            accFound.setIdUser(currentCursor.getString(index));
+            index=currentCursor.getColumnIndex("balance");
+            accFound.setBalance(Integer.parseInt(currentCursor.getString(index)));
+            helper.close();
+
+            return accFound;
+        }
+        else
+            return null;
+    }
+    public static Account getAccountByAcc(Context context,int usrAcc)
+    {
+        Database helper=Database.createHelper(context);
+        Cursor currentCursor = queryByAccountId(context, usrAcc);
         if(currentCursor.getCount()>0)
         {
             currentCursor.moveToFirst();

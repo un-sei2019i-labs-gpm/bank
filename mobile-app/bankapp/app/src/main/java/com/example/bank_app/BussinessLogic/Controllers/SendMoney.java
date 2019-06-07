@@ -16,6 +16,13 @@ public class SendMoney
         return account.getBalance();
 
     }
+    public static int fetchAccNumber(Context context, String idUser)
+    {
+        Account account=AccountRepository.getAccountByUser(context,idUser);
+        return account.getAccountNumber();
+
+    }
+
     public static void populateDataBase(Context context)
     {
         UserRepository.createUser(context,new User("afmoyar","123456","user","1018"));
@@ -32,14 +39,22 @@ public class SendMoney
         else
             return false;
     }
-    public  static boolean sendMoney(Account transfer, Account receiver, int amount)
+    public  static boolean sendMoney(Context context, int accTransmitter, int accReceiver, int amount, int balance)
     {
-        if(transfer.getBalance()>=amount)
-        {
-            int trBalance;
-            int reBalance;
-            return true;
+
+        if(AccountRepository.checkAccByID(context, accReceiver)){
+            if(balance>=amount)
+            {
+                Account accRec = AccountRepository.getAccountByAcc(context, accReceiver);
+                Account accTrans = AccountRepository.getAccountByAcc(context, accTransmitter);
+                accRec.setBalance(accRec.getBalance() + amount);
+                accTrans.setBalance(accTrans.getBalance() - amount);
+                AccountRepository.updateAccountBalance(context, accRec);
+                AccountRepository.updateAccountBalance(context, accTrans);
+                return true;
+            }
         }
+
         return false;
     }
 }
