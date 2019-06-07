@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.bank_app.BussinessLogic.SendMoney;
 import com.example.bank_app.DataAccess.Models.User;
 import com.example.bank_app.DataAccess.Repositories.UserRepository;
 import com.example.bank_app.Presentation.UserWelcomeActivity;
@@ -22,14 +23,11 @@ public class MainActivity extends AppCompatActivity{
 
     Button logInButton ;
     protected void onCreate(Bundle savedInstanceState){
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        UserRepository.createUser(this,new User("afmoyar","123456","user","1018"));
-        UserRepository.createUser(this,new User("email","123456","user","1234"));
-        logInButton = (Button)findViewById(R.id.logInButton);
 
+        SendMoney.populateDataBase(this);
+        logInButton = (Button)findViewById(R.id.logInButton);
         logInButton.setOnClickListener(new View.OnClickListener()
        {
 
