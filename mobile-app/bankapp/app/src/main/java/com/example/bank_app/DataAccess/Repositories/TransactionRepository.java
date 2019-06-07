@@ -1,6 +1,7 @@
 package com.example.bank_app.DataAccess.Repositories;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 
 import com.example.bank_app.DataAccess.Database.Database;
@@ -16,8 +17,9 @@ public class TransactionRepository {
 
     }
 
-    public static Cursor queryAccID(Database helper, int accID){
+    public static Cursor queryAccID(Context context, int accID){
 
+        Database helper=Database.createHelper(context);
         Cursor currentCursor = helper.getReadableDatabase().query("Transac", new String[]
                         {"_ID_transaction", "time_of_transaction","id_transmiter", "id_receiver", "amount"},
                 "id_transmiter like '"+accID+"'",
@@ -25,8 +27,9 @@ public class TransactionRepository {
         return currentCursor;
     }
 
-    public void createTransaction(Database helper, Transaction transaction){
+    public void createTransaction(Context context, Transaction transaction){
 
+        Database helper=Database.createHelper(context);
         ContentValues valores = new ContentValues();
         SimpleDateFormat formater = new SimpleDateFormat(this.format);
         valores.put("time_of_transaction", formater.format(transaction.getTimeOfTransaction()));
@@ -37,9 +40,9 @@ public class TransactionRepository {
         helper.close();
     }
 
-    public static boolean deleteTransaction(Database helper, Transaction transaction){
-
-        Cursor currentCursor = queryAccID(helper, transaction.getIdTransmitter());
+    public static boolean deleteTransaction(Context context, Transaction transaction){
+        Database helper=Database.createHelper(context);
+        Cursor currentCursor = queryAccID(context, transaction.getIdTransmitter());
         if(currentCursor.getCount()>0)
         {
             helper.getWritableDatabase().delete("Transac",
