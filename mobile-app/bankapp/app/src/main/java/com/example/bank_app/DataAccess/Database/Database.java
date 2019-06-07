@@ -32,6 +32,11 @@ public class Database extends SQLiteOpenHelper{
                 "references User(_ID_user), foreign key (id_transmiter) references User(_ID_user));";
         db.execSQL(createTransaction);
     }
+    public static Database createHelper(Context context)
+    {
+        Database helper = new Database(context, "BD1", null, 1);
+        return helper;
+    }
     /*
     public void insertReg(String name, String doc, String email, String pas,String role){
         ContentValues valores = new ContentValues();
@@ -69,15 +74,6 @@ public class Database extends SQLiteOpenHelper{
     //metodo para validar si el usuario existe
 
     /**/
-    public Cursor validateCredentials(String doc, String pas) throws SQLException
-    {
-        Cursor currentCursor = null;
-        currentCursor = this.getReadableDatabase().query("User", new String[] {"_ID_user",
-                "email", "password","role"}, "_ID_user like '"+doc+"'"+"and password like '"+pas+"'",
-                null, null, null, null);
 
-        return currentCursor;
-
-    }
 
 }
