@@ -10,6 +10,12 @@ import com.example.bank_app.DataAccess.Repositories.UserRepository;
 
 public class SendMoney
 {
+    public static int fetchBalance(Context context, String idUser)
+    {
+        Account account=AccountRepository.getAccountByUser(context,idUser);
+        return account.getBalance();
+
+    }
     public static void populateDataBase(Context context)
     {
         UserRepository.createUser(context,new User("afmoyar","123456","user","1018"));

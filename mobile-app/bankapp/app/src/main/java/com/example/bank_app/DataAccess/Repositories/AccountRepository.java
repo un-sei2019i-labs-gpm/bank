@@ -12,8 +12,8 @@ public class AccountRepository {
 
     }
 
-    private static boolean checkAccByID(Database helper, int accId){
-
+    private static boolean checkAccByID(Context context, int accId){
+        Database helper=Database.createHelper(context);
         Cursor cursor = helper.getReadableDatabase().query("Account", new String[]
                 {"_ID_account", "_ID_user","balance"}, "_ID_account like '"+accId+"'",
                 null, null, null, null);
