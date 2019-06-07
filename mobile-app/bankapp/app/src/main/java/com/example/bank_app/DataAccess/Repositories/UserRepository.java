@@ -2,6 +2,7 @@ package com.example.bank_app.DataAccess.Repositories;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 
 import com.example.bank_app.DataAccess.Database.Database;
 import com.example.bank_app.DataAccess.Models.User;
@@ -9,6 +10,17 @@ import com.example.bank_app.DataAccess.Models.User;
 public class UserRepository
 {
     public UserRepository(){
+
+    }
+    public static Cursor validateCredentials(Context context,String doc, String pas) throws SQLException
+    {
+        Database helper=Database.createHelper(context);
+        Cursor currentCursor = null;
+        currentCursor = helper.getReadableDatabase().query("User", new String[] {"_ID_user",
+                        "email", "password","role"}, "_ID_user like '"+doc+"'"+"and password like '"+pas+"'",
+                null, null, null, null);
+
+        return currentCursor;
 
     }
     private static boolean checkUserByDoc(Context context, String doc)
