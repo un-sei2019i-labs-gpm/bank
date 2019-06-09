@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Presentation.TransferActivity"></activity>
-        <activity android:name=".Presentation.UserWelcomeActivity" />
         <activity android:name=".Presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
