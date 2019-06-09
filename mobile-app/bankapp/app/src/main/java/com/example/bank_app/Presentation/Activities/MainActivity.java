@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.bank_app.BussinessLogic.Controllers.SendMoneyController;
+import com.example.bank_app.BussinessLogic.Controllers.LogInController;
 
 import com.example.bank_app.R;
 
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity{
            public void onClick (View v){
             EditText idEditText = (EditText) findViewById(R.id.idEditText);
             EditText paswordEditText = (EditText) findViewById(R.id.paswordEditText);
-            boolean logIn= SendMoneyController.logIn(getApplicationContext(),idEditText.getText().toString(), paswordEditText.getText().toString());
+            boolean logIn= LogInController.logIn(getApplicationContext(),idEditText.getText().toString(), paswordEditText.getText().toString());
             if (logIn) {
                 Toast.makeText(getApplicationContext(), "welcome", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), TransferActivity.class);

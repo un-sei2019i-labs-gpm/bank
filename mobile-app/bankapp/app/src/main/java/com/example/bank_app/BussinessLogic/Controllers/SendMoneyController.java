@@ -16,6 +16,7 @@ public class SendMoneyController
         return account.getBalance();
 
     }
+
     public static int fetchAccNumber(Context context, String idUser)
     {
         Account account=AccountRepository.getAccountByUser(context,idUser);
@@ -31,14 +32,7 @@ public class SendMoneyController
         AccountRepository.createAccount(context, new Account("1234", 2000));
 
     }
-    public static boolean logIn(Context context, String userId, String password)
-    {
-        Cursor cursor=UserRepository.validateCredentials(context,userId, password);
-        if(cursor.getCount() > 0)
-            return true;
-        else
-            return false;
-    }
+
     public  static boolean sendMoney(Context context, int accTransmitter, int accReceiver, int amount, int balance)
     {
 
