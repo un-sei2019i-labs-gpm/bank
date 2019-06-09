@@ -1,4 +1,4 @@
-package com.example.bank_app.Presentation.Activities;
+package com.example.bank_app.Presentation;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

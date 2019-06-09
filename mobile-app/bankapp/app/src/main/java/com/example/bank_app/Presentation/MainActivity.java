@@ -1,7 +1,8 @@
-package com.example.bank_app.Presentation.Activities;
+package com.example.bank_app.Presentation;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.bank_app.DataAccess.Models.User;
 import com.example.bank_app.DataAccess.Repositories.UserRepository;
+import com.example.bank_app.Presentation.UserWelcomeActivity;
 
 import com.example.bank_app.DataAccess.Database.Database;
 import com.example.bank_app.R;
