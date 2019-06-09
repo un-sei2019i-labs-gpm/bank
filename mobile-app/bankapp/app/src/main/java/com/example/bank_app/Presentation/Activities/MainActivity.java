@@ -1,4 +1,4 @@
-package com.example.bank_app.Presentation;
+package com.example.bank_app.Presentation.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,12 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.bank_app.BussinessLogic.Controllers.SendMoney;
+import com.example.bank_app.BussinessLogic.Controllers.SendMoneyController;
 
-import com.example.bank_app.DataAccess.Models.Account;
-import com.example.bank_app.DataAccess.Models.User;
-import com.example.bank_app.DataAccess.Repositories.AccountRepository;
-import com.example.bank_app.DataAccess.Repositories.UserRepository;
 import com.example.bank_app.R;
 
 public class MainActivity extends AppCompatActivity{
@@ -23,7 +19,7 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SendMoney.populateDataBase(this);
+        SendMoneyController.populateDataBase(this);
         logInButton = (Button)findViewById(R.id.logInButton);
         logInButton.setOnClickListener(new View.OnClickListener()
        {
@@ -31,7 +27,7 @@ public class MainActivity extends AppCompatActivity{
            public void onClick (View v){
             EditText idEditText = (EditText) findViewById(R.id.idEditText);
             EditText paswordEditText = (EditText) findViewById(R.id.paswordEditText);
-            boolean logIn=SendMoney.logIn(getApplicationContext(),idEditText.getText().toString(), paswordEditText.getText().toString());
+            boolean logIn= SendMoneyController.logIn(getApplicationContext(),idEditText.getText().toString(), paswordEditText.getText().toString());
             if (logIn) {
                 Toast.makeText(getApplicationContext(), "welcome", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), TransferActivity.class);

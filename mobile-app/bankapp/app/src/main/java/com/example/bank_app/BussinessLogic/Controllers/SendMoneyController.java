@@ -8,7 +8,7 @@ import com.example.bank_app.DataAccess.Models.User;
 import com.example.bank_app.DataAccess.Repositories.AccountRepository;
 import com.example.bank_app.DataAccess.Repositories.UserRepository;
 
-public class SendMoney
+public class SendMoneyController
 {
     public static int fetchBalance(Context context, String idUser)
     {
