@@ -90,7 +90,6 @@ public class AccountRepository {
     }
     public static Account getAccountByAcc(Context context,int usrAcc)
     {
-        Database helper=Database.createHelper(context);
         Cursor currentCursor = queryByAccountId(context, usrAcc);
         if(currentCursor.getCount()>0)
         {
@@ -102,7 +101,6 @@ public class AccountRepository {
             accFound.setIdUser(currentCursor.getString(index));
             index=currentCursor.getColumnIndex("balance");
             accFound.setBalance(Integer.parseInt(currentCursor.getString(index)));
-            helper.close();
 
             return accFound;
         }
